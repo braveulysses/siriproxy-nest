@@ -5,6 +5,6 @@
 ##########################
 
   - name: 'Nest'
-    git: 'git://github.com/cobralibre/SiriProxy-NestThermostat.git'
+    git: 'git://github.com/cobralibre/siriproxy-nest.git'
     email: '<your_nest_account_email>'
     password: '<your_nest_account_password>'
