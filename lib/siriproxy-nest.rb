@@ -1,5 +1,8 @@
 require 'nest_thermostat'
 
+# TODO: Report general Nest status
+# TODO: Report time until target temperature
+
 class SiriProxy::Plugin::Nest < SiriProxy::Plugin
 
   LOWER_LIMIT = 50
@@ -43,7 +46,8 @@ class SiriProxy::Plugin::Nest < SiriProxy::Plugin
 
   [ "I'm leaving", "we're leaving",
     "set the thermostat to away", 
-    "set nest to away", "set away", "set to away" ].map do |command|
+    "set nest to away", "set away", "set to away",
+    "start away mode" ].map do |command|
     listen_for(/#{command}/i) { set_away_mode }
   end
 
@@ -61,7 +65,7 @@ class SiriProxy::Plugin::Nest < SiriProxy::Plugin
 
   def respond_with_humidity
     humidity = @nest.humidity.round()
-    say "The humidity is #{humidity} percent."
+    say "The indoor humidity is #{humidity} percent."
     request_completed
   end
 
@@ -101,7 +105,7 @@ class SiriProxy::Plugin::Nest < SiriProxy::Plugin
 
   def end_away_mode
     @nest.away = false
-    say "The Nest is now not in away mode."
+    say "The Nest is now out of away mode."
     request_completed
   end
 
